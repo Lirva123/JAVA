@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+static void main(String[] args) {
+        Scanner leer = new Scanner(System.in);
+        double x, y,z;
+        System.out.println("Ingrese los 3 nums (aunque aparezca un error funciona igual :3)");
+        x = leer.nextInt();
+        y = leer.nextInt();
+        z = leer.nextInt();
+
+        // suma
+        double suma = x + y + z;
+        System.out.println("SUMA: " + suma);
+        //producto
+        double producto = x*y*z;
+        System.out.println("PRODUCTO:" + producto);
+        //promedio
+        double promedio = ((suma)/3);
+        System.out.println("PROMEDIO:" + promedio);
+
+        //maximo y minimo
+        double max = x;
+        if (y > max) {
+                max = y;
+        }
+        if (z > max) {
+                max = z;
+        }
+
+        double min = x;
+        if (y < min) {
+                min = y;
+        }
+        if (z < min) {
+                min = z;
+        }
+
+        System.out.println("MAYOR: " + max);
+        System.out.println("MENOR: " + min);
+    }
