@@ -1,0 +1,12 @@
+import java.util.Scanner;
+
+static void main(String[] args) {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Ingrese un numnero y se le dira si es par o impar");
+        double x = leer.nextInt();
+        if (x % 2 == 0) {
+            System.out.println("Su numero es par");
+        } else {
+            System.out.println("Su numero es impar");
+        }
+    }
