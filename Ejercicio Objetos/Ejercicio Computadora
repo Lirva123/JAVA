@@ -1,0 +1,152 @@
+//Se desea crear un programa que simule la creación de una pc, el mismo debe poseer un placa madre, procesador, RAM y puede tener o no placa de video.
+// Una vez creada la pc se puede modificar los componentes, agregar o quitar RAM y realizar diferentes funciones como: 
+// encender, apagar, reiniciar y ver especificaciones. Para apagar, ver las especificaciones y reiniciar tiene que estar prendido
+
+import java.util.Scanner;
+public class Main {
+    static String procesador,placaMadre, placaVideo;
+    static int ram;
+    static Scanner leer = new Scanner(System.in);
+    static int opcion;
+
+    static void Menu(){
+        System.out.print("\n---MENU---");
+        System.out.print("\n1.Encender");
+        System.out.print("\n2.Aoagar");
+        System.out.print("\n3.Reiniciar");
+        System.out.print("\n4.Modificar componentes");
+        System.out.print("\n5.Ver componentes");
+        System.out.print("\n6.SALIR");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("---COMPUTADORA---");
+        System.out.print("Procesador: ");
+        String procesador = leer.nextLine();
+        System.out.print("Placa Madre: ");
+        String placaMadre = leer.nextLine();
+        System.out.print("Placa de Video ");
+        String placaVideo = leer.nextLine();
+        System.out.print("Memoria RAM (GB): ");
+        int ram = leer.nextInt();
+        leer.nextLine();
+
+        Computadora oCompu = new Computadora(procesador, placaMadre, placaVideo, ram);
+
+        do {
+            Menu();
+            System.out.print("\nOPCION :D :");
+            opcion = leer.nextInt();
+
+            switch (opcion){
+                case 1:
+                    oCompu.Encender();
+                    break;
+                case 2:
+                    oCompu.Apagar();
+                    break;
+                case 3:
+                    oCompu.Reiniciar();
+                    break;
+                case 4:
+                    leer.nextLine();
+                    System.out.print("MODIFIQUE LOS COMPONENTES:");
+
+                    System.out.print("\nProcesador: ");
+                    String p = leer.nextLine();
+                    System.out.print("\nPlaca Madre: ");
+                    String m = leer.nextLine();
+                    System.out.print("\nPlaca Video: ");
+                    String v = leer.nextLine();
+                    System.out.print("\nRam (en GB): ");
+                    int r = leer.nextInt();
+
+                    oCompu.Modificar(p,m,v,r);
+
+                    break;
+                case 5:
+                    oCompu.Mostrar();
+                    break;
+                case 6:
+                    System.out.print("\nCHAU!!");
+            }
+        }while(opcion != 6);
+    }
+}
+
+//Se desea crear un programa que simule la creación de una pc, el mismo debe poseer un placa madre, procesador, RAM y puede tener o no placa de video.
+// Una vez creada la pc se puede modificar los componentes, agregar o quitar RAM y realizar diferentes funciones como: 
+// encender, apagar, reiniciar y ver especificaciones. Para apagar, ver las especificaciones y reiniciar tiene que estar prendido
+
+public class Computadora {
+    private String placaMadre, procesador, placaVideo;
+    private int ram;
+    private boolean encendido;
+
+    public String getPlacaMadre() {
+        return placaMadre;
+    }
+
+    public String getProcesador() {
+        return procesador;
+    }
+
+    public int getRam(int NuevaRam) {
+        this.ram = NuevaRam;
+        System.out.print("Ram actualizada a:" + ram + "GB!");
+        return ram;
+    }
+
+    String getPlacaVideo() {
+        return placaVideo;
+    }
+
+    public Computadora(String procesador, String placaMadre, String placaVideo, int ram) {
+        this.placaMadre = placaMadre;
+        this.procesador = procesador;
+        this.placaVideo = placaVideo;
+        this.ram = ram;
+        this.encendido = false;
+    }
+
+    public void Encender() {
+        if (encendido)
+            System.out.print("La PC ya esta prendida");
+        else{
+            encendido = true;
+            System.out.println("PC PRENDIDA!!!");
+        }
+    }
+
+    public void Apagar() {
+        if (encendido) {
+            encendido = false;
+            System.out.print("PC APAGADA!!!");
+        }
+    }
+
+    public void Reiniciar() {
+        if (encendido){
+            System.out.print("REINICIANDO...");
+            Apagar();
+            Encender();
+        }else
+            System.out.println("No se puede reiniciar");
+    }
+
+    public void Mostrar() {
+        if(encendido){
+        System.out.println("Especificaiones-> ¨\nProcesador: " + procesador + "\nPlaca Madre: " + placaMadre + "\nPlaca Vidoe: " + placaVideo + "\nRAM: " + ram);
+        }else{
+            System.out.print("No se puede ver pq esta apagado");
+        }
+    }
+
+    public void Modificar(String p, String m, String v, int r) {
+        this.procesador = p;
+        this.placaMadre = m;
+        this.placaVideo = v;
+        this.ram = r;
+        System.out.println("TODO MODIFICADO :3");
+    }
+}
