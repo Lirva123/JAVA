@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+static void main(String[] args) {
+    Scanner leer = new Scanner(System.in);
+    double peso, altura, imc = 0;
+    char opcion;
+
+    System.out.println("Seleccione:");
+    System.out.println("a. Libras y Pulgadas");
+    System.out.println("b. Kilogramos y Metros");
+    opcion = leer.next().charAt(0);
+
+    if (opcion == 'a') {
+        System.out.print("peso en libras: ");
+        peso = leer.nextDouble();
+        System.out.print("altura en pulgadas: ");
+        altura = leer.nextDouble();
+        imc = (peso * 703) / (altura * altura);
+
+    } else if (opcion == 'b') {
+
+        System.out.print("peso en kilogramos: ");
+        peso = leer.nextDouble();
+        System.out.print("altura en metros: ");
+        altura = leer.nextDouble();
+        imc = peso / (altura * altura);
+    }
+
+    System.out.println("Su IMC ees: " + imc);
+
+    if (imc < 18.5) {
+        System.out.println("Bajo peso");
+    } else if (imc >= 18.5 && imc <= 24.9) {
+        System.out.println("Peso Medio");
+    } else if (imc >= 25 && imc <= 29.9) {
+        System.out.println("Sobrepeso");
+    } else {
+        System.out.println("Obeso");
+    }
+}
