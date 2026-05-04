@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+static void main(String[] args) {
+    Scanner leer = new Scanner(System.in);
+
+    System.out.print("Ingrese un carácter: ");
+    char c = leer.next().charAt(0);
+
+    if (c >= '0' && c <= '9') {
+
+        System.out.println("El carácter '" + c + "' es un dígito entre 0 y 9.");
+    } else {
+        System.out.println("El carácter '" + c + "' NO es un dígito.");
+    }
+}
