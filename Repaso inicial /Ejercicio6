@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+static void main(String[] args) {
+    Scanner leer = new Scanner(System.in);
+    int numero;
+
+    while (true) {
+        System.out.print("Ingrese un número entero de 5 dígitos: ");
+        numero = leer.nextInt();
+
+        if (numero >= 10000 && numero <= 99999) {
+            break;
+        } else {
+            System.out.println("EL NUM TIENE Q TENER 5 DIGIOS!!!.");
+        }
+    }
+
+    int suma = 0;
+    int auxiliar = numero;
+
+    while (auxiliar > 0) {
+        suma += auxiliar % 10;
+        auxiliar = auxiliar / 10;
+    }
+    System.out.println("La suma dde " + numero + " es " + suma);
+}
