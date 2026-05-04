@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+static void main(String[] args) {
+    Scanner leer = new Scanner(System.in);
+    System.out.print("Ingresoe el num que quiere empezar: ");
+    int x = leer.nextInt();
+    System.out.print("Ingresoe cuantos nums quiere mostrar: ");
+    int n = leer.nextInt();
+    System.out.print("los " + n + " primos desde " + x + "son:");
+    int contprimos = 0;
+    int num = x;
+
+    System.out.println("Los primeros " + n + " números primos desde " + x + " son:");
+
+    while (contprimos < n) {
+        if (num >= 2) {
+            boolean primo = true;
+            int divisor = 2;
+
+            while (divisor < num) {
+                if (num % divisor == 0)
+                    primo = false;
+                divisor++;
+            }
+
+            if (primo) {
+                if (primo) {
+                    System.out.println(num);
+                    contprimos++;
+                }
+            }
+            num++;
+        }
+    }
+}
