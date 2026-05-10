@@ -1,0 +1,292 @@
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    static Scanner leer = new Scanner(System.in);
+
+    static ArrayList<Computadora> listacompu = new ArrayList<>();
+    static ArrayList<Programa> listaprog = new ArrayList<>();
+    static Computadora pcSeleccionada = null;
+
+    public static void main(String[] args) {
+        cargarComputadoras();
+        cargarProgramas();
+        menuPrincipal();
+    }
+
+    public static void menuPrincipal() {
+
+        String opcion = "";
+
+        do {
+            System.out.println("\n˚₊‧꒰ა ☆ ໒꒱ ‧₊˚TIENDITA˚₊‧꒰ა ☆ ໒꒱ ‧₊˚");
+            System.out.println("1) Compu mas barata");
+            System.out.println("2) Compu mas cara");
+            System.out.println("3) Elegir computadora");
+            System.out.println("4) Buscar PC segun programas");
+            System.out.println("5) Programas compatibles d la compu elegida ");
+            System.out.println("6) Salir");
+            System.out.print("Opcion: ");
+
+            opcion = leer.nextLine();
+
+            switch (opcion) {
+
+                case "1":
+                    mostrarMasBarata();
+                    break;
+
+                case "2":
+                    mostrarMasCara();
+                    break;
+
+                case "3":
+                    elegirComputadora();
+                    break;
+
+                case "4":
+                    recomendarComputadoras();
+                    break;
+
+                case "5":
+
+                    if (pcSeleccionada != null) {
+                        programasCompatibles();
+                    }
+                    break;
+
+                case "6":
+                    System.out.println("•｡ꪆৎ ˚⋅CHAU!! •｡ꪆৎ ˚⋅");
+                    break;
+            }
+        } while (!opcion.equals("6"));
+    }
+
+    public static void mostrarMasBarata() {
+
+        Computadora barata = listacompu.get(0);
+        for (int i = 0; i < listacompu.size(); i++) {
+
+            Computadora pc = listacompu.get(i);
+            int precioActual = Integer.parseInt(pc.getPrecio());
+            int precioBarata = Integer.parseInt(barata.getPrecio());
+
+            if (precioActual < precioBarata) {
+                barata = pc;
+            }
+        }
+        System.out.println("PC menos costosa:");
+        System.out.println(barata.getMarca() + " " + barata.getModelo() + " - $" + barata.getPrecio());
+    }
+
+    public static void mostrarMasCara() {
+
+        Computadora cara = listacompu.get(0);
+        for (int i = 0; i < listacompu.size(); i++) {
+            Computadora pc = listacompu.get(i);
+            int precioActual = Integer.parseInt(pc.getPrecio());
+            int precioCara = Integer.parseInt(cara.getPrecio());
+
+            if (precioActual > precioCara) {
+                cara = pc;
+            }
+        }
+        System.out.println("PC mas costosa:");
+        System.out.println(cara.getMarca() + " " + cara.getModelo() + " - $" + cara.getPrecio());
+    }
+    public static void elegirComputadora() {
+
+        System.out.println("°❀⋆࿔*:･.COMPUTADORAS.･:*࿔⋆.❀°");
+
+        for (int i = 0; i < listacompu.size(); i++) {
+            Computadora pc = listacompu.get(i);
+            System.out.println((i + 1) + ") "
+                    + pc.getMarca() + " " + pc.getModelo() + "-" + pc.getProcesador() + "-" + pc.getRam() + "-" + pc.getModeloGpu() + "-" + pc.getMarcaGpu() + "-" + pc.getAlmacenamiento()
+                    + " - $"
+                    + pc.getPrecio()
+            );
+        }
+
+        int opcion = 0;
+        do {
+                System.out.print("Ingrese el numero de la computadora: ");
+                opcion = Integer.parseInt(leer.nextLine());
+                if (opcion < 1 || opcion > listacompu.size()) {
+                    System.out.println("Numero incorrecto.");
+                }
+
+        } while (opcion < 1 || opcion > listacompu.size());
+
+        pcSeleccionada = listacompu.get(opcion - 1);
+        System.out.println("Computadora elegida:");
+        System.out.println(pcSeleccionada.getMarca() + " " + pcSeleccionada.getModelo() + "-" + pcSeleccionada.getProcesador() + "-" + pcSeleccionada.getRam() + "-" + pcSeleccionada.getModeloGpu() + "-" + pcSeleccionada.getMarcaGpu() + "-" + pcSeleccionada.getAlmacenamiento()
+                + " - $"
+                + pcSeleccionada.getPrecio()
+        );
+    }
+
+    public static void programasCompatibles() {
+
+        System.out.println("°❀⋆࿔*:･.Progoramas compatibles.･:*࿔⋆.❀°");
+
+        for (int i = 0; i < listaprog.size(); i++) {
+            Programa p = listaprog.get(i);
+            float hilosPC = Float.parseFloat(pcSeleccionada.getHilos());
+            float hilosPrograma = Float.parseFloat(p.getHilos());
+            float frecuenciaPC = Float.parseFloat(pcSeleccionada.getFrecuencia());
+            float frecuenciaPrograma = Float.parseFloat(p.getFrecuencia());
+            float ramPC = Float.parseFloat(pcSeleccionada.getRam());
+            float ramPrograma = Float.parseFloat(p.getRam());
+            float vramPC = Float.parseFloat(pcSeleccionada.getVram());
+            float vramPrograma = Float.parseFloat(p.getVram());
+            float almacenamientoPC = Float.parseFloat(pcSeleccionada.getAlmacenamiento());
+            float almacenamientoPrograma = Float.parseFloat(p.getAlmacenamiento());
+
+            if (hilosPC >= hilosPrograma &&
+                    frecuenciaPC >= frecuenciaPrograma &&
+                    ramPC >= ramPrograma &&
+                    vramPC >= vramPrograma &&
+                    almacenamientoPC >= almacenamientoPrograma) {
+
+                System.out.println((i + 1) + ") " + p.getNombre());
+            }
+        }
+    }
+
+    public static void recomendarComputadoras() {
+        ArrayList<Programa> seleccionados = new ArrayList<>();
+        System.out.println("\n✶⋆.˚꩜ .ᐟ˙⋆✶PROGRAMAS DISPONIBLES✶⋆.˚꩜ .ᐟ˙⋆✶");
+        for (int i = 0; i < listaprog.size(); i++) {
+            System.out.println((i + 1) + ") " +
+                    listaprog.get(i).getNombre());
+        }
+
+        System.out.println("\nProgramas: (nums)");
+        System.out.println("Escribi 0 para erminar.");
+
+        while (true) {
+
+            try {
+                int opcion = Integer.parseInt(leer.nextLine());
+
+                if (opcion == 0) {
+                    break;
+                }
+                if (opcion >= 1 && opcion <= listaprog.size()) {
+                    seleccionados.add(listaprog.get(opcion - 1));
+
+                } else {
+                    System.out.println("Numero invalido.");
+                }
+
+            } catch (Exception e) {
+                System.out.println("ERROR!!!.");
+            }
+        }
+
+        float maxHilos = 0;
+        float maxFrecuencia = 0;
+        float maxRam = 0;
+        float maxVram = 0;
+        float maxAlmacenamiento = 0;
+
+        for (Programa p : seleccionados) {
+
+            if (Float.parseFloat(p.getHilos()) > maxHilos) {
+                maxHilos = Float.parseFloat(p.getHilos());
+            }
+            if (Float.parseFloat(p.getFrecuencia()) > maxFrecuencia) {
+                maxFrecuencia = Float.parseFloat(p.getFrecuencia());
+            }
+            if (Float.parseFloat(p.getRam()) > maxRam) {
+                maxRam = Float.parseFloat(p.getRam());
+            }
+            if (Float.parseFloat(p.getVram()) > maxVram) {
+                maxVram = Float.parseFloat(p.getVram());
+            }
+            if (Float.parseFloat(p.getAlmacenamiento()) > maxAlmacenamiento) {
+                maxAlmacenamiento = Float.parseFloat(p.getAlmacenamiento());
+            }
+        }
+
+        System.out.println("\n‿︵˓ʚ♡COMPUTADORAS RECOMENDADAS♡ɞ˓︵‿");
+
+        for (Computadora pc : listacompu) {
+            boolean cumple =
+                    Float.parseFloat(pc.getHilos()) >= maxHilos
+                            &&
+                            Float.parseFloat(pc.getFrecuencia()) >= maxFrecuencia
+                            &&
+                            Float.parseFloat(pc.getRam()) >= maxRam
+                            &&
+                            Float.parseFloat(pc.getVram()) >= maxVram
+                            &&
+                            Float.parseFloat(pc.getAlmacenamiento()) >= maxAlmacenamiento;
+
+            if (cumple) {
+                System.out.println(pc.getMarca() + " "  + pc.getModelo() + " | Ganancia: $" + pc.getGanancia());
+            }
+        }
+    }
+//esta parte la tuve q buscar pq no entendia y no podia serializar el archivo D:
+    public static void cargarComputadoras() {
+
+        File archivo = new File("src/Computadoras.txt");
+        try {
+
+            Scanner lector = new Scanner(archivo);
+            while (lector.hasNextLine()) {
+
+                String linea = lector.nextLine();
+
+                String[] datos = linea.replace("{", "")
+                        .replace("}", "")
+                        .replace("\"", "")
+                        .split(",");
+
+                if (datos.length == 12) {
+
+                    Computadora pc = new Computadora(
+                            datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], datos[7], datos[8], datos[9], datos[10], datos[11]
+                    );
+
+                    listacompu.add(pc);
+                }
+            }
+            lector.close();
+            System.out.println("Computadoras cargadas: " + listacompu.size());
+
+        } catch (Exception e) {
+            System.out.println("Error leyendo computadoras.");
+        }
+    }
+//y esta parte tmb la busque...
+    public static void cargarProgramas() {
+        File archivito = new File("src/Programas.txt");
+        try {
+            Scanner lector = new Scanner(archivito);
+            while (lector.hasNextLine()) {
+
+                String linea = lector.nextLine();
+                String[] datos = linea.replace("{", "")
+                        .replace("}", "")
+                        .replace("\"", "")
+                        .split(",");
+
+                if (datos.length == 6) {
+                    Programa programa = new Programa(
+                            datos[0], datos[1], datos[2], datos[3], datos[4], datos[5]
+                    );
+                    listaprog.add(programa);
+                }
+            }
+            lector.close();
+            System.out.println("Programas cargados: " + listaprog.size());
+
+        } catch (Exception e) {
+            System.out.println("Error leyendo programas.");
+        }
+    }
+}
