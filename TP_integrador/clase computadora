@@ -1,0 +1,78 @@
+public class Computadora {
+
+    private String marca;
+    private String modelo;
+    private String procesador;
+    private String hilos;
+    private String frecuencia;
+    private String ram;
+    private String marcaGpu;
+    private String modeloGpu;
+    private String vram;
+    private String almacenamiento;
+    private String precio;
+    private String ganancia;
+
+    public Computadora(String marca, String modelo,  String procesador, String hilos, String frecuencia, String ram, String marcaGpu, String modeloGpu, String vram, String almacenamiento, String precio, String ganancia) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.procesador = procesador;
+        this.hilos = hilos;
+        this.frecuencia = frecuencia;
+        this.ram = ram;
+        this.marcaGpu = marcaGpu;
+        this.modeloGpu = modeloGpu;
+        this.vram = vram;
+        this.almacenamiento = almacenamiento;
+        this.precio = precio;
+        this.ganancia = ganancia;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public String getProcesador() {
+        return procesador;
+    }
+
+    public String getHilos() {
+        return hilos;
+    }
+
+    public String getFrecuencia() {
+        return frecuencia;
+    }
+
+    public String getRam() {
+        return ram;
+    }
+
+    public String getMarcaGpu() {
+        return marcaGpu;
+    }
+
+    public String getModeloGpu() {
+        return modeloGpu;
+    }
+
+    public String getVram() {
+        return vram;
+    }
+
+    public String getAlmacenamiento() {
+        return almacenamiento;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public String getGanancia() {
+        return ganancia;
+    }
+}
