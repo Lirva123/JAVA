@@ -1,0 +1,42 @@
+public class Programa {
+
+    private String nombre;
+    private String hilos;
+    private String frecuencia;
+    private String ram;
+    private String vram;
+    private String almacenamiento;
+
+    public Programa(String nombre, String hilos, String frecuencia, String ram, String vram, String almacenamiento) {
+        this.nombre = nombre;
+        this.hilos = hilos;
+        this.frecuencia = frecuencia;
+        this.ram = ram;
+        this.vram = vram;
+        this.almacenamiento = almacenamiento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getHilos() {
+        return hilos;
+    }
+
+    public String getFrecuencia() {
+        return frecuencia;
+    }
+
+    public String getRam() {
+        return ram;
+    }
+
+    public String getVram() {
+        return vram;
+    }
+
+    public String getAlmacenamiento() {
+        return almacenamiento;
+    }
+}
